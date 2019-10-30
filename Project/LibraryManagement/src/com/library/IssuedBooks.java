@@ -328,7 +328,7 @@ public class IssuedBooks extends javax.swing.JFrame {
     {
         try
         {  
-            Class.forName("com.mysql.jdbc.Driver");  
+            Class.forName("oracle.jdbc.OracleDriver");  
             con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","##Dh1122334455@@@");  
             stmt=con.createStatement(); 
         }
