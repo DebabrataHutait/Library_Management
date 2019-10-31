@@ -1,12 +1,12 @@
 package com.library;
 
-import com.mysql.jdbc.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -394,7 +394,7 @@ public class AddNewBook extends javax.swing.JFrame {
         catch(Exception e)
         { 
             System.out.println(e);
-            JOptionPane.showMessageDialog(this,"connection error");
+            JOptionPane.showMessageDialog(this,"connection failed");
         }
     }
     public void disconnect()

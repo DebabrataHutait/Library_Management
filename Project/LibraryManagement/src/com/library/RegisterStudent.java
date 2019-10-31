@@ -11,15 +11,17 @@ import javax.swing.JOptionPane;
  *
  * @author Debabrata
  */
+
 public class RegisterStudent extends javax.swing.JFrame {
 
     Connection con;
     Statement stmt;
     ResultSet rs;
-    String query;
-    /**
+    String sql;
+    
+    /*
      * Creates new form RegisterStudent
-     */
+    */
     public RegisterStudent() {
         initComponents();
     }
@@ -278,7 +280,7 @@ public class RegisterStudent extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         ReturnBook rb=new ReturnBook();
         rb.setVisible(true);
-       this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -294,21 +296,22 @@ public class RegisterStudent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Please enter Address"); 
         else
         {
-        connect();
-       try
-       {
-       query="insert into student values('"+t1.getText()+"','"+t2.getText()+"','"+c1.getSelectedItem()+"','"+c2.getSelectedItem()+"','"+a1.getText()+"');";
-       stmt.executeUpdate(query);
-       JOptionPane.showMessageDialog(this,"Thank you "+t1.getText()+"\nYou are registered now");
-        
-        }
-        catch(SQLException e)
-        {
-            if(e.getErrorCode()==1062)
-                JOptionPane.showMessageDialog(this,"StudentId is a primary key, duplicate entry is not allowed\nIt should be unique");
-            else
-                JOptionPane.showMessageDialog(this,"connection error");
-        }
+            connect();
+            try{
+                sql=" insert into MA_02.STUDENT " +
+                        " values('"+t1.getText()+"','"+t2.getText()+"','"+c1.getSelectedItem()+"','"+c2.getSelectedItem()+"','"+a1.getText()+"')";
+                stmt.executeUpdate(sql);
+                JOptionPane.showMessageDialog(this,"Thank you "+t2.getText()+"\nYou are registered now");
+
+            }
+            catch(SQLException e){
+                if(e.getErrorCode()==1062)
+                    JOptionPane.showMessageDialog(this,"StudentId is a primary key, duplicate entry is not allowed\nIt should be unique");
+                else{
+                    System.out.println(e);
+                    JOptionPane.showMessageDialog(this,"connection error");
+                }
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -363,6 +366,7 @@ public class RegisterStudent extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -405,10 +409,12 @@ public class RegisterStudent extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.OracleDriver");  
             con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","##Dh1122334455@@@");  
             stmt=con.createStatement(); 
+            if(con!=null)
+                JOptionPane.showMessageDialog(this,"connection Successfull");
         }
         catch(Exception e)
         { 
-            JOptionPane.showMessageDialog(this,"connection error");
+            JOptionPane.showMessageDialog(this,"connection failed");
         }
     }
     public void disconnect()
@@ -419,9 +425,8 @@ public class RegisterStudent extends javax.swing.JFrame {
         }
         catch(Exception e)
         {}
-
     }
-    
+   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea a1;
