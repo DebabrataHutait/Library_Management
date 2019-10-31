@@ -302,7 +302,6 @@ public class RegisterStudent extends javax.swing.JFrame {
                         " values('"+t1.getText()+"','"+t2.getText()+"','"+c1.getSelectedItem()+"','"+c2.getSelectedItem()+"','"+a1.getText()+"')";
                 stmt.executeUpdate(sql);
                 JOptionPane.showMessageDialog(this,"Thank you "+t2.getText()+"\nYou are registered now");
-
             }
             catch(SQLException e){
                 if(e.getErrorCode()==1062)
@@ -409,8 +408,6 @@ public class RegisterStudent extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.OracleDriver");  
             con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","##Dh1122334455@@@");  
             stmt=con.createStatement(); 
-            if(con!=null)
-                JOptionPane.showMessageDialog(this,"connection Successfull");
         }
         catch(Exception e)
         { 
